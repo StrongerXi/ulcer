@@ -10,6 +10,11 @@ TEST_DIR=${SCRIPT_DIR}/tests
 COUNT=0
 ERROR=0
 
+# build the interpreter executable
+cd ${SCRIPT_DIR}/build
+make
+
+# execute individual integration tests
 for file in ${TEST_DIR}/*${EXTENSION}; do
   BASE=${TEST_DIR}/$(basename ${file} ${EXTENSION})
   EXPECT=${BASE}.expect
