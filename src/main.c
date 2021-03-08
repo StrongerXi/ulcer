@@ -41,24 +41,13 @@ int main(int argc, char** args)
 
         // parse source code and set up execution environment
         source_code_t sc = read_in_source_code_at(args[1]);
-        lexer_t lex = lexer_new(sc);
-        parser_t parse = parser_new(lex);
-        module_t module = parser_generate_module(parse);
         environment_t env = environment_new();
-        environment_add_module(env, module);
         setup_native_module(env);
-
-        // run code and validate stack
-        executor_t executor = executor_new(env);
-        executor_run(executor);
-        assert(list_is_empty(env->stack));
-
+        // program execution entry
+        execute_code(env, sc);
         // release resources
-        executor_free(executor);
-        environment_free(env);
-        parser_free(parse);
-        lexer_free(lex);
         source_code_free(sc);
+        environment_free(env);
     }
 
     return 0;

@@ -16,6 +16,9 @@ struct executor_s {
     environment_t env;
 };
 
+static executor_t executor_new(environment_t env);
+static void executor_free(executor_t exec);
+static void executor_run(executor_t exec);
 static executor_result_t __executor_require_statement__(environment_t env, statement_t stmt);
 static executor_result_t __executor_if_statement__(environment_t env, statement_t stmt);
 static executor_result_t __executor_elif_statement__(environment_t env, statement_t stmt);
@@ -25,7 +28,28 @@ static executor_result_t __executor_foreach_statement__(environment_t env, state
 static executor_result_t __executor_while_statement__(environment_t env, statement_t stmt);
 static executor_result_t __executor_block_statement__(environment_t env, list_t block);
 
-executor_t executor_new(environment_t env)
+
+void execute_code(environment_t env, source_code_t sc) {
+
+   // parse source code and set up execution environment
+   lexer_t lex = lexer_new(sc);
+   parser_t parse = parser_new(lex);
+   module_t module = parser_generate_module(parse);
+   environment_add_module(env, module);
+
+   // run code and validate stack
+   executor_t executor = executor_new(env);
+   executor_run(executor);
+   assert(list_is_empty(env->stack));
+
+   // release resources; module belongs to environment
+   lexer_free(lex);
+   parser_free(parse);
+   executor_free(executor);
+}
+
+
+static executor_t executor_new(environment_t env)
 {
     executor_t exec = (executor_t) mem_alloc(sizeof(struct executor_s));
     if (!exec) {
@@ -37,12 +61,12 @@ executor_t executor_new(environment_t env)
     return exec;
 }
 
-void executor_free(executor_t exec)
+static void executor_free(executor_t exec)
 {
     mem_free(exec);
 }
 
-void executor_run(executor_t exec)
+static void executor_run(executor_t exec)
 {
     list_iter_t   iter;
     environment_t env;
@@ -140,10 +164,6 @@ executor_result_t executor_statement(environment_t env, statement_t stmt)
 static executor_result_t __executor_require_statement__(environment_t env, statement_t stmt)
 {
     source_code_t sc;
-    lexer_t       lex;
-    parser_t      parse;
-    module_t      module;
-    executor_t    executor;
     cstring_t     package;
 
     package = cstring_dup(stmt->u.package_name);
@@ -159,23 +179,7 @@ static executor_result_t __executor_require_statement__(environment_t env, state
         goto leave;
     }
 
-    lex = lexer_new(sc);
-
-    parse = parser_new(lex);
-
-    module = parser_generate_module(parse);
-
-    environment_add_module(env, module);
-
-    executor_run((executor = executor_new(env)));
-    
-    executor_free(executor);
-
-    parser_free(parse);
-
-    lexer_free(lex);
-
-    source_code_free(sc);
+    execute_code(env, sc);
 
     environment_add_package(env, cstring_dup(stmt->u.package_name));
 leave:
