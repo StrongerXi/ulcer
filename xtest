@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Get the absolute path to this script
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+EXTENSION=.ul
+EXECUTABLE=${SCRIPT_DIR}/build/ulcer
+TEST_DIR=${SCRIPT_DIR}/tests
+
+# For bookkeeping
+COUNT=0
+ERROR=0
+
+for file in ${TEST_DIR}/*${EXTENSION}; do
+  BASE=${TEST_DIR}/$(basename ${file} ${EXTENSION})
+  EXPECT=${BASE}.expect
+  ACTUAL=${BASE}.actual
+  # execute test code, save and then compare output
+  ${EXECUTABLE} ${file} &> ${ACTUAL}
+  diff ${EXPECT} ${ACTUAL} &> /dev/null
+  if [ $? -ne 0 ]; then
+    ((ERROR += 1))
+    echo "${file} failed to match expected output"
+  fi
+  ((COUNT += 1))
+done
+
+# Print summary
+echo "${ERROR} failed tests out of ${COUNT}"
