@@ -1,8 +1,8 @@
 
 
 #include "environment.h"
-#include "alloc.h"
-#include "list.h"
+#include "util/alloc.h"
+#include "util/list.h"
 #include "heap.h"
 
 #include <assert.h>

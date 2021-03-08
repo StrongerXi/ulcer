@@ -5,7 +5,7 @@
 
 #include "config.h"
 #include "stack.h"
-#include "list.h"
+#include "util/list.h"
 #include "statement.h"
 
 typedef struct module_s*         module_t;

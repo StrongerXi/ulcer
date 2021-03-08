@@ -4,7 +4,7 @@
 #include "executor.h"
 #include "expression.h"
 #include "environment.h"
-#include "alloc.h"
+#include "util/alloc.h"
 #include "error.h"
 #include "heap.h"
 

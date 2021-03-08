@@ -1,10 +1,10 @@
 
 
 #include "environment.h"
-#include "hash_table.h"
-#include "hashfn.h"
+#include "util/hash_table.h"
+#include "util/hashfn.h"
+#include "util/alloc.h"
 #include "hlist.h"
-#include "alloc.h"
 #include "heap.h"
 #include "evaluator.h"
 

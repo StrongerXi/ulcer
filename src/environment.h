@@ -7,7 +7,7 @@
 #include "stack.h"
 #include "array.h"
 #include "hlist.h"
-#include "list.h"
+#include "util/list.h"
 #include "cstring.h"
 #include "expression.h"
 #include "module.h"
@@ -126,7 +126,7 @@ struct package_s {
 };
 
 struct environment_s {
-    stack_t statement_stack;
+    ustack_t statement_stack;
     list_t  local_context_stack;
     list_t  stack;
     heap_t  heap;

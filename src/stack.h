@@ -9,17 +9,17 @@ typedef struct stack_node_s {
     struct stack_node_s *next;
 }stack_node_t;
 
-typedef struct stack_t {
+typedef struct ustack_t {
     stack_node_t *top;
-}stack_t;
+} ustack_t;
 
-static void __stack_push__(stack_t *stack, stack_node_t *node)
+static void __stack_push__(ustack_t *stack, stack_node_t *node)
 {
     node->next = stack->top;
     stack->top = node;
 }
 
-static stack_node_t *__stack_pop__(stack_t *stack)
+static stack_node_t *__stack_pop__(ustack_t *stack)
 {
     stack_node_t *node = stack->top;
 

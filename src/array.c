@@ -1,7 +1,7 @@
 
 
 #include "array.h"
-#include "alloc.h"
+#include "util/alloc.h"
 
 #include <string.h>
 

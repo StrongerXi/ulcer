@@ -3,7 +3,7 @@
 #ifndef _ULCER_HASHFN_H_
 #define _ULCER_HASHFN_H_
 
-#include "config.h"
+#include "../config.h"
 
 #define HASH_PRIME_RK (0x1000193UL)
 

@@ -1,8 +1,8 @@
 
 
-#include "error.h"
+#include "../error.h"
 
-#include <malloc.h>
+#include <stdlib.h>
 
 void* mem_alloc(unsigned long size)
 {

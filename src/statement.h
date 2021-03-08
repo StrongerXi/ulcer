@@ -4,11 +4,11 @@
 #define _ULCER_STATEMENT_H_
 
 #include "config.h"
-#include "list.h"
+#include "util/list.h"
 #include "hlist.h"
 #include "stack.h"
 #include "cstring.h"
-#include "hash_table.h"
+#include "util/hash_table.h"
 #include "expression.h"
 
 typedef enum statement_type_e           statement_type_t;

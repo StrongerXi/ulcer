@@ -5,7 +5,7 @@
 
 #include "config.h"
 #include "cstring.h"
-#include "list.h"
+#include "util/list.h"
 
 typedef enum token_type_e {
     TOKEN_TYPE_NIL,

@@ -4,7 +4,7 @@ project(ulcer)
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c89 -lm")
 
 set(SOURCE_FILES
-        src/alloc.c
+        src/util/alloc.c
         src/array.c
         src/cstring.c
         src/environment.c
@@ -12,8 +12,8 @@ set(SOURCE_FILES
         src/evaluator.c
         src/executor.c
         src/expression.c
-        src/hash_table.c
-        src/hashfn.c
+        src/util/hash_table.c
+        src/util/hashfn.c
         src/heap.c
         src/lexer.c
         src/parser.c
@@ -29,7 +29,7 @@ set(SOURCE_FILES
         src/libnative.c
         src/libruntime.c
         src/libstr.c
-        src/list.c
+        src/util/list.c
 )
 
 add_executable(ulcer ${SOURCE_FILES})

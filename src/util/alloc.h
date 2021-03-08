@@ -3,10 +3,10 @@
 #ifndef _ULCER_ALLOC_H_
 #define _ULCER_ALLOC_H_
 
-#include "config.h"
+#include "../config.h"
 
 #if defined(DEBUG)
-#include <malloc.h>
+#include <stdlib.h>
 #   define mem_calloc(n)   calloc(n, sizeof(char))
 #   define mem_alloc       malloc
 #   define mem_realloc     realloc

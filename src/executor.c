@@ -5,7 +5,7 @@
 #include "statement.h"
 #include "evaluator.h"
 #include "error.h"
-#include "alloc.h"
+#include "util/alloc.h"
 #include "parser.h"
 #include "lexer.h"
 #include "source_code.h"

@@ -3,8 +3,8 @@
 #ifndef _ULCER_HASHTABLE_H_
 #define _ULCER_HASHTABLE_H_
 
-#include "config.h"
-#include "hlist.h"
+#include "../config.h"
+#include "../hlist.h"
 
 typedef struct hlist_node_ops_s {
     void (*construct)(hlist_node_t *node);

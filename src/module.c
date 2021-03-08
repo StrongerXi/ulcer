@@ -1,8 +1,8 @@
 
 
 #include "module.h"
-#include "hashfn.h"
-#include "alloc.h"
+#include "util/hashfn.h"
+#include "util/alloc.h"
 
 module_t module_new(void)
 {

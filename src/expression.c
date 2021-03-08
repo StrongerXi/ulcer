@@ -2,7 +2,7 @@
 
 #include "expression.h"
 #include "statement.h"
-#include "alloc.h"
+#include "util/alloc.h"
 
 #include <stdio.h>
 #include <assert.h>

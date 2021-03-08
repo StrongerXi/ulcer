@@ -1,7 +1,7 @@
 
 
 #include "token.h"
-#include "alloc.h"
+#include "util/alloc.h"
 
 #include <stdlib.h>
 

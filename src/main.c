@@ -3,7 +3,7 @@
 #include "parser.h"
 #include "native.h"
 #include "lexer.h"
-#include "list.h"
+#include "util/list.h"
 #include "environment.h"
 #include "source_code.h"
 #include "executor.h"

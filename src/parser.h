@@ -6,7 +6,7 @@
 #include "config.h"
 #include "module.h"
 #include "lexer.h"
-#include "list.h"
+#include "util/list.h"
 
 typedef struct parser_s* parser_t;
 

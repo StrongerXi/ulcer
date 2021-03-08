@@ -3,7 +3,7 @@
 #ifndef _ULCER_LIST_H_
 #define _ULCER_LIST_H_
 
-#include "config.h"
+#include "../config.h"
 
 struct list_node_s {
     struct list_node_s *prev;
