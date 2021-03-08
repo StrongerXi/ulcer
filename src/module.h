@@ -4,7 +4,7 @@
 #define _ULCER_MODULE_H_
 
 #include "config.h"
-#include "stack.h"
+#include "util/stack.h"
 #include "util/list.h"
 #include "statement.h"
 

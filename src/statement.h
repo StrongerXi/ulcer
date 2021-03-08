@@ -6,7 +6,7 @@
 #include "config.h"
 #include "util/list.h"
 #include "hlist.h"
-#include "stack.h"
+#include "util/stack.h"
 #include "cstring.h"
 #include "util/hash_table.h"
 #include "expression.h"

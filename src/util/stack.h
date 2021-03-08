@@ -3,7 +3,7 @@
 #ifndef _ULCER_STACK_H_
 #define _ULCER_STACK_H_
 
-#include "config.h"
+#include "../config.h"
 
 typedef struct stack_node_s {
     struct stack_node_s *next;

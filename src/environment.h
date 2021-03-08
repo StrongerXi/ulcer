@@ -4,7 +4,7 @@
 #define _ULCER_ENVIRONMENT_H_
 
 #include "config.h"
-#include "stack.h"
+#include "util/stack.h"
 #include "array.h"
 #include "hlist.h"
 #include "util/list.h"
