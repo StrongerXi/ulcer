@@ -5,6 +5,7 @@
 #include "token.h"
 #include "error.h"
 #include "util/list.h"
+#include <stdarg.h>
 
 #include <ctype.h>
 #include <string.h>
@@ -43,6 +44,7 @@ struct keyword_s keywords[] = {
     { "false",          TOKEN_VALUE_FALSE       },
 };
 
+static void     __error__(lexer_t lex, const char* msg, ...);
 static token_t  __lexer_next__(lexer_t lex);
 static char     __lexer_next_char__(lexer_t lex);
 static char     __lexer_peek_char__(lexer_t lex);
@@ -115,12 +117,23 @@ token_t lexer_next(lexer_t lex)
 
 token_t lexer_peek(lexer_t lex)
 {
+    // TODO what up tokens in lex->backups?
     return lex->tok;
 }
 
 void lexer_unget(lexer_t lex, token_t tok)
 {
     list_push_back(lex->backups, token_dup(tok)->link);
+}
+
+static void __error__(lexer_t lex, const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    // TODO what up tokens in lex->backups?
+    error(source_code_file_name(lex->sc),
+          lex->current_line, 
+          lex->current_column,
+          fmt, args);
 }
 
 token_t __lexer_next__(lexer_t lex)
@@ -331,10 +344,7 @@ reparse:
         goto reparse;
 
     } else {
-        error(source_code_file_name(lex->sc),
-              lex->current_line, 
-              lex->current_column,
-              "undeclared identifier '%c'", __lexer_peek_char__(lex));
+        __error__(lex, "undeclared identifier '%c'", __lexer_peek_char__(lex));
     }
 
     return lex->tok;
@@ -525,10 +535,7 @@ static void __lexer_parse_lpostfix__(lexer_t lex)
         lex->tok->value = TOKEN_VALUE_LITERAL_LONG;
 
     } else if (isalpha(ch)) {
-        error(source_code_file_name(lex->sc), 
-              lex->current_line, 
-              lex->current_column,
-              "invalid suffix '%c' on integer", ch);
+        __error__(lex, "invalid suffix '%c' on integer", ch);
     }
 }
 
@@ -545,24 +552,15 @@ static void __lexer_parse_fpostfix__(lexer_t lex)
                 lex->tok->token = cstring_catch(lex->tok->token, __lexer_next_char__(lex));
             }
 
-            error(source_code_file_name(lex->sc), 
-                  lex->tok->line, 
-                  lex->tok->column,
-                  "'%s' exponent has no digits", lex->tok->token);
+            __error__(lex, "'%s' exponent has no digits", lex->tok->token);
         }
 
     } else if (isalpha(ch)) {
-        error(source_code_file_name(lex->sc), 
-              lex->current_line, 
-              lex->current_column,
-              "invalid suffix '%c' on floating", ch);
+        __error__(lex, "invalid suffix '%c' on floating", ch);
 
     } else {
         if (!isdigit(lex->tok->token[cstring_length(lex->tok->token) - 1])) {
-            error(source_code_file_name(lex->sc), 
-                  lex->tok->line, 
-                  lex->tok->column,
-                  "'%s' exponent has no digits", lex->tok->token);
+            __error__(lex, "'%s' exponent has no digits", lex->tok->token);
         }
 
         lex->tok->value = TOKEN_VALUE_LITERAL_DOUBLE;
@@ -590,10 +588,7 @@ static bool __lexer_parse_div_operator__(lexer_t lex)
         __lexer_next_char__(lex);
         do {
             if (__lexer_iseof__(lex)) {
-                error(source_code_file_name(lex->sc),
-                      lex->tok->line, 
-                      lex->tok->column,
-                      "unterminated /* comment");
+                __error__(lex, "unterminated /* comment");
             }
 
             if (__lexer_next_char__(lex) == '*') {
@@ -636,10 +631,7 @@ static void __lexer_parse_escape_char__(lexer_t lex)
 
         ch = i = strtol(number, &p, 8);
         if (i > 0xff) {
-            error(source_code_file_name(lex->sc), 
-                  lex->tok->line, 
-                  lex->tok->column,
-                  "octal escape sequence out of range");
+            __error__(lex, "octal escape sequence out of range");
         }
 
     } else if (ch == 'x') {
@@ -667,10 +659,7 @@ static void __lexer_parse_escape_char__(lexer_t lex)
         case '\'': ch = '\''; break;
         case '\"': ch = '\"'; break;
         default:
-            error(source_code_file_name(lex->sc), 
-                  lex->tok->line, 
-                  lex->tok->column,
-                  "unknown escape sequence '\\%c'", ch);
+            __error__(lex, "unknown escape sequence '\\%c'", ch);
             break;
         }
         
@@ -703,17 +692,11 @@ static void __lexer_parse_literal_char__(lexer_t lex)
     }
 
     if (ch != '\'') {
-        error(source_code_file_name(lex->sc),  
-              lex->tok->line,
-              lex->tok->column,
-              "missing terminating ' character");
+        __error__(lex, "missing terminating ' character");
     }
 
     if (cstring_length(lex->tok->token) > 1) {
-        error(source_code_file_name(lex->sc),
-              lex->tok->line, 
-              lex->tok->column,
-              "multi-character character constant");
+        __error__(lex, "multi-character character constant");
     }
 }
 
@@ -743,9 +726,6 @@ static void __lexer_parse_literal_string__(lexer_t lex)
     }
 
     if (ch != '"') {
-        error(source_code_file_name(lex->sc), 
-              lex->tok->line, 
-              lex->tok->column,
-              "missing terminating \" character");
+        __error__(lex, "missing terminating \" character");
     }
 }
