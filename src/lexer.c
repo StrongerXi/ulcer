@@ -14,7 +14,6 @@ struct lexer_s {
     source_code_t   sc;
     token_t         tok;
     list_t          backups;
-    token_t         last;
     long            current_line;
     long            current_column;
 };
@@ -77,7 +76,6 @@ lexer_t lexer_new(source_code_t source_code)
     lex->sc             = source_code;
     lex->current_line   = 1;
     lex->current_column = 1;
-    lex->last           = NULL;
 
     list_init(lex->backups);
 
@@ -95,10 +93,6 @@ void lexer_free(lexer_t lex)
         }
     }
     
-    if (lex->last) {
-        token_free(lex->last);
-    }
-
     token_free(lex->tok);
 
     mem_free(lex);
@@ -112,12 +106,6 @@ token_t lexer_next(lexer_t lex)
         current = list_element(list_begin(lex->backups), token_t, link);
 
         list_pop_front(lex->backups);
-        
-        if (lex->last) {
-            token_free(lex->last);
-        }
-
-        lex->last = current;
 
         return current;
     }
