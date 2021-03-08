@@ -4,7 +4,7 @@
 #include "util/hash_table.h"
 #include "util/hashfn.h"
 #include "util/alloc.h"
-#include "hlist.h"
+#include "util/hlist.h"
 #include "heap.h"
 #include "evaluator.h"
 
