@@ -24,6 +24,8 @@ static statement_t  __parser_while_statement__(parser_t parse);
 static statement_t  __parser_for_statement__(parser_t parse);
 static statement_t  __parser_foreach_statement__(parser_t parse);
 static expression_t __parser_expression__(parser_t parse);
+// If `expr` is a function, ensure that it is anonymous.
+// Return whether `expr` is a function.
 static bool         __parser_check_expression__(cstring_t filename, expression_t expr);
 static void         __parser_without_function_expression__(cstring_t filename, expression_t expr);
 static bool         __parser_check_lvalue_expression__(expression_t expr);
