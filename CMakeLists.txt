@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ulcer)
 
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c89 -lm")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c89 -lm -g")
 
 set(SOURCE_FILES
         src/util/alloc.c
