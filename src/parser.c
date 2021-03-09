@@ -9,11 +9,11 @@
 
 struct parser_s {
     lexer_t  lex;
-    module_t module;
 };
 
-static void         __parser_translation_unit__(parser_t parse);
-static void         __parser_toplevel_statement__(parser_t parse);
+static module_t     __parser_translation_unit__(parser_t parse);
+// update `module` accordingly
+static void         __parser_toplevel_statement__(parser_t parse, module_t module);
 static statement_t  __parser_require_statement__(parser_t parse);
 static statement_t  __parser_statement__(parser_t parse);
 static statement_t  __parser_if_statement__(parser_t parse);
@@ -55,7 +55,6 @@ parser_t parser_new(lexer_t lex)
     }
 
     parse->lex    = lex;
-    parse->module = module_new();
     return parse;
 }
 
@@ -66,9 +65,7 @@ void parser_free(parser_t parse)
 
 module_t parser_generate_module(parser_t parse)
 {
-    __parser_translation_unit__(parse);
-
-    return parse->module;
+    return __parser_translation_unit__(parse);
 }
 
 static void __parser_need__(parser_t parse, token_value_t tv, const char *emsg)
@@ -96,20 +93,22 @@ static void __parser_expect_next__(parser_t parse, token_value_t tv, const char 
     }
 }
 
-static void __parser_translation_unit__(parser_t parse)
+static module_t __parser_translation_unit__(parser_t parse)
 {
+    module_t module = module_new();
     while (lexer_peek(parse->lex)->type != TOKEN_TYPE_END) {
-        __parser_toplevel_statement__(parse);
+        __parser_toplevel_statement__(parse, module);
     }
+    return module;
 }
 
-static void __parser_toplevel_statement__(parser_t parse)
+static void __parser_toplevel_statement__(parser_t parse, module_t module)
 {
     statement_t stmt;
     expression_t expr;
     switch (lexer_peek(parse->lex)->value) {
     case TOKEN_VALUE_REQUIRE:
-        module_add_statment(parse->module, __parser_require_statement__(parse));
+        module_add_statment(module, __parser_require_statement__(parse));
         break;
     
     case TOKEN_VALUE_SEMICOLON:
@@ -118,12 +117,12 @@ static void __parser_toplevel_statement__(parser_t parse)
 
     case TOKEN_VALUE_FUNCTION:
         expr = __parser_function_definition__(parse);
-        module_add_function(parse->module, expr);
+        module_add_function(module, expr);
         break;
 
     default:
         stmt = __parser_statement__(parse);
-        module_add_statment(parse->module, stmt);
+        module_add_statment(module, stmt);
         break;
     }
 }
