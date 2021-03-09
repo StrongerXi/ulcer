@@ -321,12 +321,12 @@ void environment_add_module(environment_t env, module_t module)
     list_iter_t iter;
 
     list_for_each(module->functions, iter) {
-        statement_t stmt = list_element(iter, statement_t, link);
-        assert(stmt->type == STATEMENT_TYPE_EXPRESSION && stmt->u.expr->type == EXPRESSION_TYPE_FUNCTION);
-        if (!cstring_is_empty(stmt->u.expr->u.function_expr->name)) {
-            environment_push_string(env, stmt->u.expr->u.function_expr->name);
+        expression_t expr = list_element(iter, expression_t, link);
+        assert(expr->type == EXPRESSION_TYPE_FUNCTION);
+        if (!cstring_is_empty(expr->u.function_expr->name)) {
+            environment_push_string(env, expr->u.function_expr->name);
 
-            environment_push_function(env, stmt->u.expr->u.function_expr);
+            environment_push_function(env, expr->u.function_expr);
 
             table_push_pair(environment_get_global_table(env), env);
         }

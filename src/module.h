@@ -24,7 +24,7 @@ struct module_s {
 
 module_t module_new(void);
 void     module_free(module_t module);
-void     module_add_function(module_t module, statement_t function_stmt);
+void     module_add_function(module_t module, expression_t function);
 void     module_add_statment(module_t module, statement_t stmt);
 
 #endif

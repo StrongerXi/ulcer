@@ -106,6 +106,7 @@ static void __parser_translation_unit__(parser_t parse)
 static void __parser_toplevel_statement__(parser_t parse)
 {
     statement_t stmt;
+    expression_t expr;
     switch (lexer_peek(parse->lex)->value) {
     case TOKEN_VALUE_REQUIRE:
         module_add_statment(parse->module, __parser_require_statement__(parse));
@@ -115,14 +116,14 @@ static void __parser_toplevel_statement__(parser_t parse)
         lexer_next(parse->lex);
         break;
 
+    case TOKEN_VALUE_FUNCTION:
+        expr = __parser_function_definition__(parse);
+        module_add_function(parse->module, expr);
+        break;
+
     default:
         stmt = __parser_statement__(parse);
-        if (stmt->type == STATEMENT_TYPE_EXPRESSION && 
-            stmt->u.expr->type == EXPRESSION_TYPE_FUNCTION) {
-            module_add_function(parse->module, stmt);
-        } else {
-            module_add_statment(parse->module, stmt);
-        }
+        module_add_statment(parse->module, stmt);
         break;
     }
 }
