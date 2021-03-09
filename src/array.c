@@ -225,18 +225,6 @@ void array_range(array_t a, unsigned long start, unsigned long end)
     a->nelts = newlen;
 }
 
-void array_magic(array_t a, array_magic_pt magic)
-{
-    unsigned char *base;
-    int index;
-
-    array_for_each(a, base, index) {
-        if (!magic((void*)(base + (index * a->size)))) {
-            return ;
-        }
-    }
-}
-
 bool array_insert(array_t a, unsigned int index, void *ptr)
 {
     unsigned char *p;

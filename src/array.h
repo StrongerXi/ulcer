@@ -13,7 +13,6 @@ typedef struct array_s {
 }* array_t;
 
 typedef int (*array_compare_pt)(const void *, const void *);
-typedef bool (*array_magic_pt)(void *);
 
 #define array_is_empty(a)                                                     \
     (a)->nelts == 0
@@ -67,6 +66,4 @@ bool array_erase_n(array_t a, unsigned int index, unsigned long n);
 bool array_insert(array_t a, unsigned int index, void *ptr);
 bool array_insert_n(array_t a, unsigned int index, void *ptr, unsigned long n);
 void array_range(array_t a, unsigned long start, unsigned long end);
-void array_magic(array_t a, array_magic_pt magic);
-
 #endif
