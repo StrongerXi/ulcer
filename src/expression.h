@@ -6,7 +6,7 @@
 #include "config.h"
 #include "util/list.h"
 #include "token.h"
-#include "cstring.h"
+#include "util/cstring.h"
 
 typedef enum   expression_type_e                expression_type_t;
 typedef struct expression_s*                    expression_t;

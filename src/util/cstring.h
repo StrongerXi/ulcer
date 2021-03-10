@@ -3,7 +3,7 @@
 #ifndef _ULCER_CSTRING_H_
 #define _ULCER_CSTRING_H_
 
-#include "config.h"
+#include "../config.h"
 
 typedef char* cstring_t;
 

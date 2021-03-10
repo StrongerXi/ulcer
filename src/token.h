@@ -4,7 +4,7 @@
 #define _ULCER_TOKEN_H_
 
 #include "config.h"
-#include "cstring.h"
+#include "util/cstring.h"
 #include "util/list.h"
 
 typedef enum token_type_e {

@@ -1,7 +1,7 @@
 
 
 #include "cstring.h"
-#include "util/alloc.h"
+#include "alloc.h"
 
 #include <string.h>
 #include <ctype.h>

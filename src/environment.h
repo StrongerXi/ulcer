@@ -8,7 +8,7 @@
 #include "util/array.h"
 #include "util/hlist.h"
 #include "util/list.h"
-#include "cstring.h"
+#include "util/cstring.h"
 #include "expression.h"
 #include "module.h"
 
