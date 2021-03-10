@@ -5,7 +5,7 @@ set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c89 -lm -g")
 
 set(SOURCE_FILES
         src/util/alloc.c
-        src/array.c
+        src/util/array.c
         src/cstring.c
         src/environment.c
         src/error.c

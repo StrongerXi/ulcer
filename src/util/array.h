@@ -3,7 +3,7 @@
 #ifndef _ULCER_ARRAY_H_
 #define _ULCER_ARRAY_H_
 
-#include "config.h"
+#include "../config.h"
 
 typedef struct array_s {
     void *elts;
@@ -53,17 +53,7 @@ typedef int (*array_compare_pt)(const void *, const void *);
 array_t array_new(unsigned long size);
 array_t array_newlen(unsigned long size, unsigned long n);
 void array_free(array_t a);
-array_t array_dup(array_t a);
-void array_swap(array_t lhs, array_t rhs);
-void array_shrink_to_fit(array_t a);
-bool array_reserve(array_t a, unsigned long n);
-bool array_resize(array_t a, unsigned long n);
 void *array_index(array_t a, unsigned long index);
-void *array_push(array_t a);
-void *array_push_n(array_t a, unsigned long n);
-bool array_erase(array_t a, unsigned int index);
-bool array_erase_n(array_t a, unsigned int index, unsigned long n);
-bool array_insert(array_t a, unsigned int index, void *ptr);
-bool array_insert_n(array_t a, unsigned int index, void *ptr, unsigned long n);
-void array_range(array_t a, unsigned long start, unsigned long end);
+// no effect if memory can't accomodate another element
+void array_push(array_t a, void* ptr_to_elem);
 #endif

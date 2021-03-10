@@ -391,8 +391,7 @@ static value_t __evaluator_index_expression__(environment_t env, expression_t ex
             elem = list_element(list_rbegin(env->stack), value_t, link);
             list_pop_back(env->stack);
             if (index_value->u.int_value == (int)array_length(value->u.object_value->u.array)) {
-                value_t *ptr = (value_t*)array_push(value->u.object_value->u.array);
-                *ptr = elem;
+                array_push(value->u.object_value->u.array, &elem);
             }
         }
         break;
@@ -427,7 +426,6 @@ static void __evaluator_array_push__(environment_t env, expression_t expr)
 {
     value_t array_value = NULL;
     value_t elem_value = NULL;
-    value_t *elem = NULL;
 
     evaluator_expression(env, expr->u.array_push_expr->array_expr);
 
@@ -444,9 +442,7 @@ static void __evaluator_array_push__(environment_t env, expression_t expr)
 
     elem_value = list_element(list_rbegin(env->stack), value_t, link);
 
-    elem = (value_t *) array_push(array_value->u.object_value->u.array);
-
-    *elem = elem_value;
+    array_push(array_value->u.object_value->u.array, &elem_value);
 
     list_pop_back(env->stack);
 }
@@ -661,7 +657,6 @@ static void __evaluator_native_function_call_expression__(environment_t env, val
     expression_t expr;
     native_function_pt native_function;
     value_t  elem = NULL;
-    value_t* v = NULL;
     value_t  array = NULL;
 
     native_function = function_value->u.object_value->u.function->f.native_function;
@@ -679,9 +674,7 @@ static void __evaluator_native_function_call_expression__(environment_t env, val
 
         list_pop_back(env->stack);
 
-        v = (value_t*) array_push(array->u.object_value->u.array);
-
-        *v = elem;
+        array_push(array->u.object_value->u.array, &elem);
     }
    
     native_function(env, (unsigned int) array_length(array->u.object_value->u.array));

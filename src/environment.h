@@ -5,7 +5,7 @@
 
 #include "config.h"
 #include "util/stack.h"
-#include "array.h"
+#include "util/array.h"
 #include "util/hlist.h"
 #include "util/list.h"
 #include "cstring.h"

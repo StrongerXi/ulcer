@@ -567,7 +567,6 @@ void environment_push_array_generate(environment_t env, list_t array_generate)
     expression_t expr;
     value_t      value;
     value_t      elem;
-    value_t*     dst;
 
     value = value_new(VALUE_TYPE_ARRAY);
 
@@ -584,9 +583,7 @@ void environment_push_array_generate(environment_t env, list_t array_generate)
 
         list_pop_back(env->stack);
 
-        dst = (value_t*) array_push(value->u.object_value->u.array);
-
-        *dst = elem;
+        array_push(value->u.object_value->u.array, &elem);
     }
 }
 
