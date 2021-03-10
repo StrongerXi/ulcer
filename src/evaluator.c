@@ -595,12 +595,25 @@ static void __evaluator_function_call_expression__(environment_t env, value_t fu
     expression_function_t function;
     int scopecount = 0;
 
+    // old context shouldn't interfere with function body evaluation
+    list_t old_local_context_stack = env->local_context_stack;
+    list_init(env->local_context_stack);
+
+    // push enclosing scopes of this function onto local context stack
+    list_for_each(function_value->u.object_value->u.function->scopes, iter) {
+        object = list_element(iter, object_t, link_scope);
+        environment_push_scope_local_context(env, object);
+        scopecount++;
+    }
+
+    // Set up this function's own local context
     environment_push_local_context(env);
 
     function = function_value->u.object_value->u.function->f.function_expr;
 
     args_iter = list_begin(args);
 
+    // evaluate and track each argument in this function's local context
     list_for_each(function->parameters, iter) {
         expression_function_parameter_t parameter;
 
@@ -620,12 +633,7 @@ static void __evaluator_function_call_expression__(environment_t env, value_t fu
         table_push_pair(list_element(list_rbegin(env->local_context_stack), local_context_t, link)->object->u.table, env);
     }
 
-    list_for_each(function_value->u.object_value->u.function->scopes, iter) {
-        object = list_element(iter, object_t, link_scope);
-        environment_push_scope_local_context(env, object);
-        scopecount++;
-    }
-
+    // execute each statement of the function body
     list_for_each(function->block, iter) {
         stmt = list_element(iter, statement_t, link);
         result = executor_statement(env, stmt);
@@ -644,11 +652,14 @@ static void __evaluator_function_call_expression__(environment_t env, value_t fu
         environment_push_null(env);
     }
 
+    // restore old stack
     while (scopecount--) {
         environment_pop_local_context(env);
     }
 
     environment_pop_local_context(env);
+
+    env->local_context_stack = old_local_context_stack;
 }
 
 static void __evaluator_native_function_call_expression__(environment_t env, value_t function_value, list_t args)

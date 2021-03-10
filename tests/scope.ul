@@ -1,0 +1,28 @@
+// ulcer should obey static scoping
+
+function getX() {
+  return x;
+}
+
+function foo() {
+  return getX();
+}
+
+function bar() {
+  x = 5; // shouldn't be in scope in `getX()` call
+  return getX();
+}
+
+print(foo());
+print("\n");
+print(bar());
+print("\n");
+
+
+function genId() {
+  x = 0;
+  return function(x) { return x; };
+}
+
+print(genId()(42));
+print("\n");
