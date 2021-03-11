@@ -596,8 +596,7 @@ static void __evaluator_function_call_expression__(environment_t env, value_t fu
     int scopecount = 0;
 
     // old context shouldn't interfere with function body evaluation
-    list_t old_local_context_stack = env->local_context_stack;
-    list_init(env->local_context_stack);
+    environment_push_context_frame(env);
 
     // push enclosing scopes of this function onto local context stack
     list_for_each(function_value->u.object_value->u.function->scopes, iter) {
@@ -659,7 +658,7 @@ static void __evaluator_function_call_expression__(environment_t env, value_t fu
 
     environment_pop_local_context(env);
 
-    env->local_context_stack = old_local_context_stack;
+    environment_pop_context_frame(env);
 }
 
 static void __evaluator_native_function_call_expression__(environment_t env, value_t function_value, list_t args)

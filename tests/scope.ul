@@ -1,4 +1,8 @@
-// ulcer should obey static scoping
+// utility function
+function println(x) {
+  print(x);
+  print("\n");
+}
 
 function getX() {
   return x;
@@ -9,20 +13,32 @@ function foo() {
 }
 
 function bar() {
-  x = 5; // shouldn't be in scope in `getX()` call
+  x = 5;                     // shouldn't be in scope in `getX()` call
   return getX();
 }
 
-print(foo());
-print("\n");
-print(bar());
-print("\n");
+println(foo());              // should be `null`
+println(bar());              // should be `null`
 
 
 function genId() {
   x = 0;
-  return function(x) { return x; };
+  return function(x) { 
+    return x;                // should be parameter `x`, not outer `x = 0`
+  };
 }
 
-print(genId()(42));
-print("\n");
+println(genId()(42));        // should be 42
+
+
+
+function funcs() {
+  f = function() { x = 10; };
+  g = function() { return x; };
+  return [f, g];
+}
+
+arr = funcs();
+println(arr[1]());           // should be `null`
+arr[0]();
+println(arr[1]());           // should be `null`
