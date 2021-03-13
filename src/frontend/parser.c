@@ -3,7 +3,7 @@
 #include "parser.h"
 #include "module.h"
 #include "../util/alloc.h"
-#include "../error.h"
+#include "../runtime/error.h"
 
 #include <assert.h>
 

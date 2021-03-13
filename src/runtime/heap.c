@@ -2,9 +2,9 @@
 
 #include <stdio.h>
 #include "environment.h"
-#include "util/alloc.h"
-#include "util/list.h"
 #include "heap.h"
+#include "../util/alloc.h"
+#include "../util/list.h"
 
 #include <assert.h>
 

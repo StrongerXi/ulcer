@@ -2,7 +2,7 @@
 
 #include "../config.h"
 #include "../util/alloc.h"
-#include "../native.h"
+#include "../runtime/native.h"
 
 #undef bool
 #undef true

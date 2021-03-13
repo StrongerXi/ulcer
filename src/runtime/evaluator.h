@@ -3,7 +3,7 @@
 #ifndef _ULCER_EVALUATOR_H_
 #define _ULCER_EVALUATOR_H_
 
-#include "config.h"
+#include "../config.h"
 
 void evaluator_expression(environment_t env, expression_t expr);
 void evaluator_binary_value(environment_t env, long line, long column, expression_type_t type, value_t left, value_t right);

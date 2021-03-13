@@ -4,7 +4,7 @@
 #define _ULCER_LIBMATH_H_
 
 #include "../config.h"
-#include "../environment.h"
+#include "../runtime/environment.h"
 
 void import_math_library(environment_t env);
 

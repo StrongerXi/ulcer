@@ -4,7 +4,7 @@
 #define _ULCER_LIBSTR_H_
 
 #include "../config.h"
-#include "../environment.h"
+#include "../runtime/environment.h"
 
 void import_string_library(environment_t env);
 

@@ -1,5 +1,5 @@
-#include "../native.h"
-#include "../error.h"
+#include "../runtime/native.h"
+#include "../runtime/error.h"
 #include "common.h"
 
 #include <stdio.h>

@@ -1,11 +1,11 @@
 #include "frontend/source_code.h"
 #include "frontend/lexer.h"
 #include "frontend/parser.h"
-#include "native.h"
+#include "runtime/native.h"
+#include "runtime/environment.h"
+#include "runtime/executor.h"
+#include "runtime/heap.h"
 #include "util/list.h"
-#include "environment.h"
-#include "executor.h"
-#include "heap.h"
 #include "builtins/libsdl.h"
 
 #include <stdio.h>

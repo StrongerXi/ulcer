@@ -3,7 +3,7 @@
 #include "lexer.h"
 #include "../util/alloc.h"
 #include "token.h"
-#include "../error.h"
+#include "../runtime/error.h"
 #include "../util/list.h"
 #include <stdarg.h>
 

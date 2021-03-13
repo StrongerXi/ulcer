@@ -1,6 +1,6 @@
 
 
-#include "../error.h"
+#include "../runtime/error.h"
 
 #include <stdlib.h>
 

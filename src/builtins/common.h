@@ -1,8 +1,8 @@
 #ifndef _BUILTINS_COMMON_H_
 #define _BUILTINS_COMMON_H_
 
-#include "../environment.h"
-#include "../evaluator.h"
+#include "../runtime/environment.h"
+#include "../runtime/evaluator.h"
 
 struct pair_nf {
   const char* name;

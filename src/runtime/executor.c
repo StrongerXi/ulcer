@@ -4,11 +4,11 @@
 #include "environment.h"
 #include "evaluator.h"
 #include "error.h"
-#include "util/alloc.h"
-#include "frontend/statement.h"
-#include "frontend/parser.h"
-#include "frontend/lexer.h"
-#include "frontend/source_code.h"
+#include "../util/alloc.h"
+#include "../frontend/statement.h"
+#include "../frontend/parser.h"
+#include "../frontend/lexer.h"
+#include "../frontend/source_code.h"
 
 #include <assert.h>
 

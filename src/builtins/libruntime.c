@@ -1,8 +1,8 @@
 
-#include "../native.h"
-#include "../error.h"
+#include "../runtime/native.h"
+#include "../runtime/error.h"
+#include "../runtime/heap.h"
 #include "common.h"
-#include "../heap.h"
 
 #include <stdio.h>
 #include <stdlib.h>

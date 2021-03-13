@@ -24,12 +24,12 @@ set(SOURCE_FILES
         src/frontend/statement.c
         src/frontend/token.c
         src/frontend/expression.c
-        src/environment.c
-        src/error.c
-        src/evaluator.c
-        src/executor.c
-        src/heap.c
-        src/native.c
+        src/runtime/environment.c
+        src/runtime/error.c
+        src/runtime/evaluator.c
+        src/runtime/executor.c
+        src/runtime/heap.c
+        src/runtime/native.c
         src/main.c
 )
 

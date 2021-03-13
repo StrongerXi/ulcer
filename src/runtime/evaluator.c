@@ -1,10 +1,10 @@
 
 
-#include "frontend/statement.h"
+#include "../frontend/statement.h"
+#include "../frontend/expression.h"
+#include "../util/alloc.h"
 #include "executor.h"
-#include "frontend/expression.h"
 #include "environment.h"
-#include "util/alloc.h"
 #include "error.h"
 #include "heap.h"
 

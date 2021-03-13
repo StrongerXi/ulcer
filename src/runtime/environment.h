@@ -3,14 +3,14 @@
 #ifndef _ULCER_ENVIRONMENT_H_
 #define _ULCER_ENVIRONMENT_H_
 
-#include "config.h"
-#include "util/stack.h"
-#include "util/array.h"
-#include "util/hlist.h"
-#include "util/list.h"
-#include "util/cstring.h"
-#include "frontend/expression.h"
-#include "frontend/module.h"
+#include "../config.h"
+#include "../util/stack.h"
+#include "../util/array.h"
+#include "../util/hlist.h"
+#include "../util/list.h"
+#include "../util/cstring.h"
+#include "../frontend/expression.h"
+#include "../frontend/module.h"
 
 typedef struct environment_s*   environment_t;
 typedef struct function_s*      function_t;

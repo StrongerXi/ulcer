@@ -3,9 +3,9 @@
 #ifndef _ULCER_EXECUTOR_H_
 #define _ULCER_EXECUTOR_H_
 
-#include "config.h"
+#include "../config.h"
+#include "../frontend/source_code.h"
 #include "environment.h"
-#include "frontend/source_code.h"
 
 typedef enum executor_result_e  executor_result_t;
 typedef struct executor_s*      executor_t;

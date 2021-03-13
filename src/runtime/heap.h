@@ -3,7 +3,7 @@
 #ifndef _ULCER_HEAP_H_
 #define _ULCER_HEAP_H_
 
-#include "config.h"
+#include "../config.h"
 
 heap_t heap_new(void);
 void heap_free(heap_t heap);
