@@ -9,8 +9,8 @@
 #include "util/hlist.h"
 #include "util/list.h"
 #include "util/cstring.h"
-#include "expression.h"
-#include "module.h"
+#include "frontend/expression.h"
+#include "frontend/module.h"
 
 typedef struct environment_s*   environment_t;
 typedef struct function_s*      function_t;

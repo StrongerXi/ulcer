@@ -17,19 +17,19 @@ set(SOURCE_FILES
         src/builtins/libnative.c
         src/builtins/libruntime.c
         src/builtins/libstr.c
+        src/frontend/lexer.c
+        src/frontend/parser.c
+        src/frontend/module.c
+        src/frontend/source_code.c
+        src/frontend/statement.c
+        src/frontend/token.c
+        src/frontend/expression.c
         src/environment.c
         src/error.c
         src/evaluator.c
         src/executor.c
-        src/expression.c
         src/heap.c
-        src/lexer.c
-        src/parser.c
-        src/module.c
         src/native.c
-        src/source_code.c
-        src/statement.c
-        src/token.c
         src/main.c
 )
 

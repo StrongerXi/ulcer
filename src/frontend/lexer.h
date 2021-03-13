@@ -3,7 +3,7 @@
 #ifndef _NCC_LEXER_H_
 #define _NCC_LEXER_H_
 
-#include "config.h"
+#include "../config.h"
 #include "token.h"
 #include "source_code.h"
 

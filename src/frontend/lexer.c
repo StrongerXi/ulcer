@@ -1,10 +1,10 @@
 
 
 #include "lexer.h"
-#include "util/alloc.h"
+#include "../util/alloc.h"
 #include "token.h"
-#include "error.h"
-#include "util/list.h"
+#include "../error.h"
+#include "../util/list.h"
 #include <stdarg.h>
 
 #include <ctype.h>

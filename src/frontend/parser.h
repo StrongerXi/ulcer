@@ -3,10 +3,10 @@
 #ifndef _ULCER_PARSER_H_
 #define _ULCER_PARSER_H_
 
-#include "config.h"
+#include "../config.h"
 #include "module.h"
 #include "lexer.h"
-#include "util/list.h"
+#include "../util/list.h"
 
 typedef struct parser_s* parser_t;
 

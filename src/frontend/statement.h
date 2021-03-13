@@ -3,12 +3,12 @@
 #ifndef _ULCER_STATEMENT_H_
 #define _ULCER_STATEMENT_H_
 
-#include "config.h"
-#include "util/list.h"
-#include "util/hlist.h"
-#include "util/stack.h"
-#include "util/cstring.h"
-#include "util/hash_table.h"
+#include "../config.h"
+#include "../util/list.h"
+#include "../util/hlist.h"
+#include "../util/stack.h"
+#include "../util/cstring.h"
+#include "../util/hash_table.h"
 #include "expression.h"
 
 typedef enum statement_type_e           statement_type_t;

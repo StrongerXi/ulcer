@@ -2,8 +2,8 @@
 
 #include "parser.h"
 #include "module.h"
-#include "util/alloc.h"
-#include "error.h"
+#include "../util/alloc.h"
+#include "../error.h"
 
 #include <assert.h>
 

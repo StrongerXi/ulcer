@@ -3,10 +3,10 @@
 #ifndef _ULCER_EXPRESSION_H_
 #define _ULCER_EXPRESSION_H_
 
-#include "config.h"
-#include "util/list.h"
+#include "../config.h"
+#include "../util/list.h"
 #include "token.h"
-#include "util/cstring.h"
+#include "../util/cstring.h"
 
 typedef enum   expression_type_e                expression_type_t;
 typedef struct expression_s*                    expression_t;

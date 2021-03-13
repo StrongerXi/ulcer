@@ -2,13 +2,13 @@
 
 #include "executor.h"
 #include "environment.h"
-#include "statement.h"
 #include "evaluator.h"
 #include "error.h"
 #include "util/alloc.h"
-#include "parser.h"
-#include "lexer.h"
-#include "source_code.h"
+#include "frontend/statement.h"
+#include "frontend/parser.h"
+#include "frontend/lexer.h"
+#include "frontend/source_code.h"
 
 #include <assert.h>
 

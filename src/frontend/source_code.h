@@ -3,7 +3,7 @@
 #ifndef _ULCER_SOURCE_CODE_H_
 #define _ULCER_SOURCE_CODE_H_
 
-#include "config.h"
+#include "../config.h"
 
 typedef enum source_code_type_e {
     SOURCE_CODE_TYPE_STRING, 

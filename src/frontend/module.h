@@ -3,9 +3,9 @@
 #ifndef _ULCER_MODULE_H_
 #define _ULCER_MODULE_H_
 
-#include "config.h"
-#include "util/stack.h"
-#include "util/list.h"
+#include "../config.h"
+#include "../util/stack.h"
+#include "../util/list.h"
 #include "statement.h"
 
 typedef struct module_s*         module_t;
