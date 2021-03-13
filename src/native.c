@@ -11,37 +11,37 @@
 void setup_native_module(environment_t env)
 {
 #ifdef USE_LIBNATIVE
-#   include "libnative.h"
+#   include "builtins/libnative.h"
     import_native_library(env);
 #endif
 
 #ifdef USE_LIBSTR
-#   include "libstr.h"
+#   include "builtins/libstr.h"
     import_string_library(env);
 #endif
 
 #ifdef USE_LIBMATH
-#   include "libmath.h"
+#   include "builtins/libmath.h"
     import_math_library(env);
 #endif
 
 #ifdef USE_LIBSDL
-#   include "libsdl.h"
+#   include "builtins/libsdl.h"
     import_libsdl_library(env);
 #endif
 
 #ifdef USE_LIBHEAP
-#   include "libheap.h"
+#   include "builtins/libheap.h"
     import_heap_library(env);
 #endif
 
 #ifdef USE_LIBFILE
-#   include "libfile.h"
+#   include "builtins/libfile.h"
     import_file_library(env);
 #endif
 
 #ifdef USE_LIBRUNTIME
-#   include "libruntime.h"
+#   include "builtins/libruntime.h"
     import_runtime_library(env);
 #endif
 }

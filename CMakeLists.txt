@@ -10,6 +10,12 @@ set(SOURCE_FILES
         src/util/hash_table.c
         src/util/hashfn.c
         src/util/list.c
+        src/builtins/libfile.c
+        src/builtins/libheap.c
+        src/builtins/libmath.c
+        src/builtins/libnative.c
+        src/builtins/libruntime.c
+        src/builtins/libstr.c
         src/environment.c
         src/error.c
         src/evaluator.c
@@ -24,12 +30,6 @@ set(SOURCE_FILES
         src/statement.c
         src/token.c
         src/main.c
-        src/libfile.c
-        src/libheap.c
-        src/libmath.c
-        src/libnative.c
-        src/libruntime.c
-        src/libstr.c
 )
 
 add_executable(ulcer ${SOURCE_FILES})

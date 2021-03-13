@@ -1,8 +1,8 @@
 
 
-#include "config.h"
-#include "alloc.h"
-#include "native.h"
+#include "../config.h"
+#include "../util/alloc.h"
+#include "../native.h"
 
 #undef bool
 #undef true

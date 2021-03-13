@@ -1,9 +1,9 @@
 
-#include "native.h"
-#include "error.h"
-#include "evaluator.h"
-#include "environment.h"
-#include "heap.h"
+#include "../native.h"
+#include "../error.h"
+#include "../evaluator.h"
+#include "../environment.h"
+#include "../heap.h"
 
 #include <stdio.h>
 #include <stdlib.h>

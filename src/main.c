@@ -6,7 +6,7 @@
 #include "source_code.h"
 #include "executor.h"
 #include "heap.h"
-#include "libsdl.h"
+#include "builtins/libsdl.h"
 
 #include <stdio.h>
 #include <stdlib.h>
