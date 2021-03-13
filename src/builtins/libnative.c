@@ -2,8 +2,8 @@
 
 #include "../native.h"
 #include "../error.h"
-#include "../evaluator.h"
-#include "../environment.h"
+#include "common.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -234,22 +234,14 @@ static void native_version(environment_t env, unsigned int argc)
 
 void import_native_library(environment_t env)
 {
-    int i;
-    table_t global_table;
-    struct pair_s {
-        char* name;
-        native_function_pt func;
-    } pairs[] = {
+    table_t tbl = environment_get_global_table(env);
+
+    struct pair_nf pairs[] = {
         { "print",          native_print },
         { "type",           native_type },
         { "len",            native_len },
         { "version",        native_version },
     };
 
-    global_table = environment_get_global_table(env);
-    for (i = 0; i < sizeof(pairs) / sizeof(struct pair_s); i++) {
-        environment_push_str(env, pairs[i].name);
-        environment_push_native_function(env, pairs[i].func);
-        table_push_pair(global_table, env);
-    }
+    push_native_funcs(env, tbl, pairs, sizeof(pairs) / sizeof(struct pair_nf));
 }

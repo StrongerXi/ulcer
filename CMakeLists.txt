@@ -10,6 +10,7 @@ set(SOURCE_FILES
         src/util/hash_table.c
         src/util/hashfn.c
         src/util/list.c
+        src/builtins/common.c
         src/builtins/libfile.c
         src/builtins/libheap.c
         src/builtins/libmath.c

@@ -2,8 +2,7 @@
 
 #include "../native.h"
 #include "../error.h"
-#include "../evaluator.h"
-#include "../environment.h"
+#include "common.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,32 +108,14 @@ static void native_file_write(environment_t env, unsigned int argc)
 
 void import_file_library(environment_t env)
 {
-    struct pair_s {
-        char* name;
-        native_function_pt func;
-    };
+    table_t tbl = create_table(env, "file");
 
-    int i;
-    value_t string_table;
-
-    environment_push_str(env, "file");
-
-    environment_push_table(env);
-
-    string_table = list_element(list_rbegin(env->stack), value_t, link);
-
-    table_push_pair(environment_get_global_table(env), env);
-
-    struct pair_s pairs[] = {
+    struct pair_nf pairs[] = {
         { "open",           native_file_open    },
         { "close",          native_file_close   },
         { "read",           native_file_read    },
         { "write",          native_file_write   },
     };
 
-    for (i = 0; i < sizeof(pairs) / sizeof(struct pair_s); i++) {
-        environment_push_str(env, pairs[i].name);
-        environment_push_native_function(env, pairs[i].func);
-        table_push_pair(string_table->u.object_value->u.table, env);
-    }
+    push_native_funcs(env, tbl, pairs, sizeof(pairs) / sizeof(struct pair_nf));
 }

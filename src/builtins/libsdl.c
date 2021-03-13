@@ -12,6 +12,7 @@
 
 #include <SDL.h>
 #include <SDL_surface.h>
+#include "common.h"
 
 #pragma comment (lib, "SDL2.lib")
 #pragma comment (lib, "SDL2main.lib")
@@ -493,25 +494,11 @@ static void import_libsdl_const(environment_t env, table_t table)
 
 void import_libsdl_library(environment_t env)
 {
-    struct pair_s {
-        char* name;
-        native_function_pt func;
-    };
+    table_t tbl = create_table(env, "sdl");
 
-    int i;
-    value_t sdl_table;
+    import_libsdl_const(env, tbl);
 
-    environment_push_str(env, "sdl");
-
-    environment_push_table(env);
-
-    sdl_table = list_element(list_rbegin(env->stack), value_t, link);
-
-    table_push_pair(environment_get_global_table(env), env);
-
-    import_libsdl_const(env, sdl_table->u.object_value->u.table);
-
-    struct pair_s pairs[] = {
+    struct pair_nf pairs[] = {
         { "init",                           native_sdl_init },
         { "quit",                           native_sdl_quit },
         { "create_window",                  native_sdl_create_window },
@@ -532,11 +519,7 @@ void import_libsdl_library(environment_t env)
         { "get_ticks",                      native_sdl_get_ticks },
     };
 
-    for (i = 0; i < sizeof(pairs) / sizeof(struct pair_s); i++) {
-        environment_push_str(env, pairs[i].name);
-        environment_push_native_function(env, pairs[i].func);
-        table_push_pair(sdl_table->u.object_value->u.table, env);
-    }
+    push_native_funcs(env, tbl, pairs, sizeof(pairs) / sizeof(struct pair_nf));
 }
 
 #else
